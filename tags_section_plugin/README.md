@@ -2,15 +2,11 @@
 
 The plugin adds a section to the side menu with pre-prepared builders filters by tags.
 
-## Developing
+## Usage
 
-1. Place plugin directories (`build_common` and `tags_section_plugin`) to the `master/www/` directory
-2. Install python package `buildbot_pkg`
-3. Install dependencies via `yarn install`
-4. Execute `yarn link` (in the `build_common` directory)
-5. Execute `yarn link buildbot-build-common` (in the `tags_section_plugin` directory)
-6. Compile plugin via `pip3 install -e .` in the `tags_section_plugin` directory
-7. Configure plugin in the `master/master.py` file:
+1. Install python package `buildbot-tags-section-plugin`
+directory
+2. Configure plugin in the `master/master.py` file:
     ```python
         c['www'] = dict(
             ...
@@ -37,8 +33,25 @@ The plugin adds a section to the side menu with pre-prepared builders filters by
             )
         )
     ```
-8. Reconfigure BuildBot
+3. Reconfigure BuildBot
 
-After any changes to the plugin code, you need to run the `pip3 install -e .` command to recompile the plugin and apply the changes.
+## Build and distribution
 
-Get more information about plugin usage and distribution at [README](tags_section_plugin/README.md)
+Get more information at https://packaging.python.org/tutorials/packaging-projects/
+
+1. 
+    ```
+    python3 -m pip install --user --upgrade setuptools wheel
+    ```
+2.
+    ```
+    python3 setup.py sdist bdist_wheel
+    ```
+3.
+    ```
+    python3 -m pip install --user --upgrade twine
+    ```
+4.
+    ```
+    python3 -m twine upload --repository pypi dist/*
+    ```
